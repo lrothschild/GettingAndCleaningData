@@ -1,5 +1,5 @@
 library(dplyr)
-#Download X_train.txt and X_test.txt as dplyr tables with 561 columns
+# Read in X_train.txt and X_test.txt as dplyr tables with 561 columns
 file_tr<-"UCI HAR Dataset/train/X_train.txt"
 file_ts<-"UCI HAR Dataset/test/X_test.txt"
 tr<-tbl_df(read.fwf(file_tr,widths=rep(c(16),561)))
@@ -9,7 +9,7 @@ tr_ts<-bind_rows(tr,ts)
 rm(tr,ts)
 ##eliminate the rows of frequency calculations
 tr_ts<-select(tr_ts,V1:V265)
-#download the first 265 columns of the file features.txt,make into vector
+# Read in the first 265 columns of the file features.txt,make into vector
 ffile<-"UCI HAR Dataset/features.txt"
 features=readLines(ffile)
 features<-unlist(features)
@@ -28,14 +28,14 @@ measStd<-select(tr_ts,contains("std"))
 ##cbind the two data tables, call it "meas"
 meas<-tbl_df(bind_cols(measMean,measStd))
 rm(measMean,measStd,tr_ts)
-#We need to add the activity and subject columns
-#download activity column
+# We need to add the activity and subject columns
+# Read in activity column
 act_tr<-tbl_df(read.fwf("UCI HAR Dataset/train/y_train.txt",widths=1,col.names="Activity"))
 act_ts<-tbl_df(read.fwf("UCI HAR Dataset/test/y_test.txt",widths=1,col.names="Activity"))
 #rbind train and test files and delete them
 act<-bind_rows(act_tr,act_ts)
 rm(act_tr,act_ts)
-#download subject column, train and test
+# Read in subject column, train and test
 file_tr<-"UCI HAR Dataset/train/subject_train.txt"
 file_ts<-"UCI HAR Dataset/test/subject_test.txt"
 sub_tr<-tbl_df(read.delim(file_tr,header=FALSE,col.names="Subj"))
