@@ -37,7 +37,7 @@ following steps:
 
 12. Read in subject columns, train and test, and row bind them as “sub”
 
-13. Column bind the tables "sub","act" and "meas" into final table “Measurements”
+13. Column bind the tables "sub","act" and "meas" into final table “Measurements"
 
 14. “MeasurementSummary” is created from “Measurements” using the dplyr function
     “summarise_each” with function “mean” and grouping by Subject and Activity.
